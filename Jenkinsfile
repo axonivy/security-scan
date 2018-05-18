@@ -8,7 +8,7 @@ pipeline {
     stage('scan') {
       steps {
         script {
-          cmd "zap-cli open-url 'http://www.axonivy.com'"
+          sh "zap-cli open-url 'http://www.axonivy.com'"
         }
       }
     }

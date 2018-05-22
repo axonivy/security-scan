@@ -1,9 +1,8 @@
 node {
     stage('start ZAP') {
         checkout scm
-        docker.build('test-zap-image:latest').inside('-p 5050:5050') { c ->
-            sh 'sleep 10'
-            sh "zap-cli -p 5050 open-url 'http://www.axonivy.com'"
+        docker.image('owasp/zap2docker-stable').inside('-p 5050:5050') { c ->
+            sh "zap-cli -p 5050 quick-scan --self-contained --start-options '-config api.disablekey=true' 'http://www.axonivy.com'"
         }
     }
 }

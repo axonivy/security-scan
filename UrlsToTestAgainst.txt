@@ -1,0 +1,10 @@
+http://ivyengine:8081/ivy/info/index.jsp?showSystemApp=true
+http://ivyengine:8081/ivy/info/index.jsp?pageId=test
+http://ivyengine:8081/ivy/api/Portal/workflow/processstarts
+http://ivyengine:8081/ivy/error/
+http://ivyengine:8081/ivy/rd/
+http://ivyengine:8081/ivy/rdlib/
+http://ivyengine:8081/ivy/rdjnlp/
+http://ivyengine:8081/ivy/ulcload/
+http://ivyengine:8081/ivy/api/
+http://ivyengine:8081/ivy/pagearchive/

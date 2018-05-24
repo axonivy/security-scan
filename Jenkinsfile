@@ -5,7 +5,7 @@ node {
     stage('run ZAP') {
         docker.build("ivy-zap-engine", "--pull .").withRun() { c ->
             
-            docker.image('owasp/zap2docker-stable').inside("--link ${c.id}:ivyengine -p 5050:5050 -v $WORKSPACE:/tmp ") { d ->
+            docker.image('owasp/zap2docker-weekly').inside("--link ${c.id}:ivyengine -p 5050:5050 -v $WORKSPACE:/tmp ") { d ->
                 def TARGET_URL = 'http://ivyengine:8081/ivy/'
                 def PROXY_PORT = '5050'
                 sh "while [ \$(curl -o /dev/null --silent --head --write-out '%{http_code}\n' $TARGET_URL) -ne 200 ]; do sleep 2; done"

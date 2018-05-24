@@ -9,7 +9,7 @@ node {
                 def TARGET_URL = 'http://ivyengine:8081/ivy/'
                 def PROXY_PORT = '5050'
                 sh "while [ \$(curl -o /dev/null --silent --head --write-out '%{http_code}\n' $TARGET_URL) -ne 200 ]; do sleep 2; done"
-                sh "mkdir -p /home/zap/.ZAP/policies; cp /tmp/IvyPolicy.policy /home/zap/.ZAP/policies/"
+                sh "cp /tmp/IvyPolicy.policy /home/zap/.ZAP_D/policies/"
                 sh "cp -f /tmp/report.html.xsl /zap/xml/"
                 sh "zap-cli -v -p $PROXY_PORT start -o '-config api.disablekey=true'"
                 sh "zap-cli -v -p $PROXY_PORT status -t 120"

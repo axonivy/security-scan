@@ -14,6 +14,7 @@ node {
                 sh "zap-cli -v -p $PROXY_PORT status -t 120"
                 sh "zap-cli -v -p $PROXY_PORT context import /tmp/IvyContext.context"
                 sh "curl \"http://localhost:$PROXY_PORT/JSON/importurls/action/importurls/?zapapiformat=JSON&formMethod=GET&filePath=/tmp/UrlsToTestAgainst.txt\""
+                sh "curl \"http://localhost:$PROXY_PORT/JSON/ascan/action/setOptionDefaultPolicy/?zapapiformat=JSON&formMethod=GET&String=IvyPolicy\""
                 sh "zap-cli -v -p $PROXY_PORT open-url $TARGET_URL"
                 sh "zap-cli -v -p $PROXY_PORT spider -c IvyContext $TARGET_URL"
                 sh "zap-cli -v -p $PROXY_PORT active-scan -c IvyContext -r $TARGET_URL"

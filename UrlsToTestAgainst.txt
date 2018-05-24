@@ -8,3 +8,5 @@ http://ivyengine:8081/ivy/rdjnlp/
 http://ivyengine:8081/ivy/ulcload/
 http://ivyengine:8081/ivy/api/
 http://ivyengine:8081/ivy/pagearchive/
+http://localhost:8081/ivy/wf/System/
+http://localhost:8081/ivy/wf/Portal/

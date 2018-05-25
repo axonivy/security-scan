@@ -14,9 +14,6 @@
             <include>Language.XML</include>
             <include>OS</include>
             <include>OS.Linux</include>
-            <include>SCM</include>
-            <include>SCM.Git</include>
-            <include>SCM.SVN</include>
             <include>WS</include>
             <include>WS.Tomcat</include>
         </tech>
@@ -37,6 +34,7 @@
         </authentication>
         <users>
             <user>1;true;QXhvbkl2eQ==;2;QXhvbkl2eQ==~QXhvbkl2eQ==~</user>
+            <user>2;true;YWRtaW4=;2;YWRtaW4=~YWRtaW4=~</user>
         </users>
         <forceduser>1</forceduser>
         <session>

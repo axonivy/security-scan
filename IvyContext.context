@@ -17,6 +17,20 @@
             <include>WS</include>
             <include>WS.Tomcat</include>
             <exclude>SCM</exclude>
+            <exclude>SCM.Git</exclude>
+            <exclude>SCM.SVN</exclude>
+            <exclude>Db.Firebird</exclude>
+            <exclude>Db.IBM DB2</exclude>
+            <exclude>Db.Microsoft Access</exclude>
+            <exclude>Db.Microsoft SQL Server</exclude>
+            <exclude>Db.MySQL</exclude>
+            <exclude>Db.Oracle</exclude>
+            <exclude>Db.PostgreSQL</exclude>
+            <exclude>Db.SAP MaxDB</exclude>
+            <exclude>Db.SQLite</exclude>
+            <exclude>Db.Sybase</exclude>
+            <exclude>WS.Apache</exclude>
+            <exclude>WS.IIS</exclude>
         </tech>
         <urlparser>
             <class>org.zaproxy.zap.model.StandardParameterParser</class>

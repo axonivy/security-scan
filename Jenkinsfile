@@ -1,3 +1,17 @@
+@NonCPS
+def parseLogFile(String log) {
+	def whitelist = ["352","541"]
+	log.split("\n").each { line ->
+		if (line ==~ /[\+\[\s].*/) {
+			return
+		}
+		def groups = line.split("\\|")
+		if (whitelist.contains(groups[3].trim())) {
+			throw new java.text.ParseException("Security scan contains HIGH alerts!", 0)
+		}
+	}
+}
+
 node {
     stage('checkout') {
         checkout scm
@@ -23,10 +37,11 @@ node {
                     sh "zap-cli -v -p $PROXY_PORT report -o /tmp/IvyEngine_ZAP_report.html -f html"
                     sh "zap-cli -v -p $PROXY_PORT report -o /tmp/IvyEngine_ZAP_report.xml -f xml"
                     sh "cp /zap/zap.log /tmp/IvyEngine_ZAP_log.log"
-                    sh "zap-cli -v -p $PROXY_PORT alerts -l High"
+                    def log = sh (script: "zap-cli -v -p $PROXY_PORT alerts --exit-code false -l High", returnStdout: true)
+                    parseLogFile(log)
                 }
             }
-        } catch (err) {
+        } catch (java.text.ParseException err) {
             currentBuild.result = 'UNSTABLE'
         }
         archiveArtifacts 'IvyEngine_ZAP*.*'

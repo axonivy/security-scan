@@ -5,12 +5,14 @@ def parseLogFile(String log) {
 		if (line ==~ /[\+\[\s].*/) {
 			return
 		}
-		def groups = line.split("\\|")
-		if (whitelist.contains(groups[3].trim())) {
+		def cweId = line.split("\\|")[3].trim()
+		if (cweId ==~ /[0-9]+/ && !whitelist.contains(cweId)) {
 			throw new java.text.ParseException("Security scan contains HIGH alerts!", 0)
 		}
 	}
 }
+
+properties( pipelineTriggers([cron('H(3-6) * * *')] )
 
 node {
     stage('checkout') {

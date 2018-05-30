@@ -1,13 +1,27 @@
 @NonCPS
-def parseLogFile(String log) {
-	def whitelist = ["352","541"]
+def static parseLogFile(String log) {
+	def whitelist = [["352", ".*javax.faces.resource/fileupload.*"],
+		             ["352", ".*/error.*"],
+		             ["352", ".*/login.*"],
+		             ["352", ".*/taskList.*"],
+		             ["541", ".*"]]
 	log.split("\n").each { line ->
 		if (line ==~ /[\+\[\s].*/) {
 			return
 		}
-		def cweId = line.split("\\|")[3].trim()
-		if (cweId ==~ /[0-9]+/ && !whitelist.contains(cweId)) {
-			throw new java.text.ParseException("Security scan contains HIGH alerts!", 0)
+		def columns = line.split("\\|")
+		def cweId = columns[3].trim()
+		def url = columns[4].trim()
+		if (cweId ==~ /[0-9]+/) {
+			def whitelisted = false
+			whitelist.each { item ->
+				if (item[0] == cweId && url ==~ item[1]) {
+                    whitelisted = true
+				}
+			}
+			if (!whitelisted) {
+				throw new java.text.ParseException("Security scan contains valid HIGH alerts!", 0)
+			}
 		}
 	}
 }

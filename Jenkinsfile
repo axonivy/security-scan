@@ -12,7 +12,7 @@ def parseLogFile(String log) {
 	}
 }
 
-properties( pipelineTriggers([cron('H(3-6) * * *')] )
+properties( [pipelineTriggers([cron('H(3-6) * * *')] )
 
 node {
     stage('checkout') {

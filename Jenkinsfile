@@ -13,6 +13,7 @@ def parseLogFile(String log) {
 }
 
 node {
+    properties([pipelineTriggers([cron('H 5 * * *')])])
     stage('checkout') {
         checkout scm
     }

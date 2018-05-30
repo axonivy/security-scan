@@ -35,7 +35,8 @@ node {
         try {
             docker.build("ivy-zap-engine", "--pull .").withRun() { c ->
                 
-                def dockerImage = docker.image('owasp/zap2docker-weekly').pull()
+                def dockerImage = docker.image('owasp/zap2docker-weekly')
+                dockerImage.pull()
                 dockerImage.inside("--link ${c.id}:ivyengine -p 5050:5050 -v $WORKSPACE:/tmp ") { d ->
                     def TARGET_URL = 'http://ivyengine:8081/ivy/'
                     def PROXY_PORT = '5050'

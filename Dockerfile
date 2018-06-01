@@ -1,5 +1,5 @@
 FROM zugprodocker:5000/axonivy/axonivy-engine
 
-COPY --chown=ivy:ivy testprojects/SecTestHelper.iar /opt/AxonIvyEngine/deploy/Portal/
+COPY --chown=ivy:ivy testprojects/SecTestHelper.iar /opt/ivy/deploy/Portal/
 
-ENTRYPOINT ["/opt/AxonIvyEngine/bin/AxonIvyEngine", "start"]
+ENTRYPOINT ["/opt/ivy/bin/AxonIvyEngine", "start"]

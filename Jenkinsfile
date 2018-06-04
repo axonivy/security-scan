@@ -1,6 +1,6 @@
-@NonCPS
+@NonCPS // Annotation to indicate that method should be executed in one go without serializing any objects.
 def static parseLogFile(String log) {
-	def whitelist = [["352", ".*javax.faces.resource/fileupload.*"],
+	def filter = [["352", ".*javax.faces.resource/fileupload.*"],
 		             ["352", ".*/error.*"],
 		             ["352", ".*/login.*"],
 		             ["352", ".*/taskList.*"],
@@ -14,7 +14,7 @@ def static parseLogFile(String log) {
 		def url = columns[4].trim()
 		if (cweId ==~ /[0-9]+/) {
 			def whitelisted = false
-			whitelist.each { item ->
+			filter.each { item ->
 				if (item[0] == cweId && url ==~ item[1]) {
                     whitelisted = true
 				}

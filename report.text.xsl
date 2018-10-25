@@ -17,6 +17,6 @@
 		<xsl:variable name="refValue">
 			<xsl:value-of select="str:replaceAll(str:new($refValue1),'&lt;/p&gt;',' ')"/>
 		</xsl:variable>
-		<xsl:value-of select="concat(cweid, '|', riskcode, '|', riskdesc, '|', name, '|', $descValue, '|', $refValue, '&#13;')"/>
+		<xsl:value-of select="concat(cweid, '¦', riskcode, '¦', riskdesc, '¦', name, '¦', $descValue, '¦', $refValue, '&#13;')"/>
 	</xsl:template>
 </xsl:stylesheet>

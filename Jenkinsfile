@@ -54,7 +54,7 @@ node {
                     sh "zap-cli -v -p $PROXY_PORT report -o /tmp/IvyEngine_ZAP_report.html -f html"
                     sh "zap-cli -v -p $PROXY_PORT report -o /tmp/IvyEngine_ZAP_report.xml -f xml"
                     sh "cp -f /tmp/report.text.xsl /zap/xml/report.html.xsl"
-                    sh "zap-cli -v -p $PROXY_PORT report -o /tmp/IvyEngine_ZAP_report.txt -f xml"
+                    sh "zap-cli -v -p $PROXY_PORT report -o /tmp/IvyEngine_ZAP_report.txt -f html"
                     sh "cp /zap/zap.log /tmp/IvyEngine_ZAP_log.log"
                     def log = sh (script: "zap-cli -v -p $PROXY_PORT alerts --exit-code false -l High", returnStdout: true)
                     parseLogFile(log)

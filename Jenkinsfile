@@ -37,6 +37,6 @@ node {
     stage('warnings') {
         recordIssues reportEncoding: '', sourceCodeEncoding: '', 
           tools: [[id: '', name: '', pattern: 'IvyEngine_ZAP_report.txt', tool: [$class: 'GroovyScript', id: 'ch.ivyteam.zap']]], 
-          unstableNewAll: 1
+          unstableTotalHigh: 10
 	}
 }

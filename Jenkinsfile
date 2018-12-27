@@ -35,8 +35,6 @@ node {
         archiveArtifacts 'IvyEngine_ZAP*.*'
     }
     stage('warnings') {
-        recordIssues reportEncoding: '', sourceCodeEncoding: '', 
-          tools: [[id: '', name: '', pattern: 'IvyEngine_ZAP_report.txt', tool: [$class: 'GroovyScript', id: 'ch.ivyteam.zap']]], 
-          unstableTotalHigh: 11
+        recordIssues tools: [groovyScript(parserId: 'ch.ivyteam.zap', pattern: 'IvyEngine_ZAP_report.txt')], unstableTotalHigh: 11		
 	}
 }

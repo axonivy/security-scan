@@ -6,8 +6,7 @@ node {
     stage('run ZAP') {
 		docker.build("ivy-zap-engine", "--pull .").withRun() { c ->
 
-			def dockerImage = docker.image('owasp/zap2docker-stable')
-			dockerImage.pull()
+			def dockerImage =  docker.build("ivy-zap2docker", "--pull ./ivy-zap2docker")
 			dockerImage.inside("--link ${c.id}:ivyengine -p 5050:5050 -v $WORKSPACE:/tmp ") { d ->
 				def TARGET_PORT = '8080'
 				def TARGET_URL = "http://ivyengine:$TARGET_PORT/ivy/"

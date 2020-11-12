@@ -1,12 +1,3 @@
-http://ivyengine:IVY_PORT/ivy/info/index.jsp?showSystemApp=true
-http://ivyengine:IVY_PORT/ivy/info/index.jsp?pageId=test
-http://ivyengine:IVY_PORT/ivy/api/Portal/workflow/processstarts
-http://ivyengine:IVY_PORT/ivy/error/
-http://ivyengine:IVY_PORT/ivy/rd/
-http://ivyengine:IVY_PORT/ivy/rdlib/
-http://ivyengine:IVY_PORT/ivy/rdjnlp/
-http://ivyengine:IVY_PORT/ivy/ulcload/
-http://ivyengine:IVY_PORT/ivy/api/
-http://ivyengine:IVY_PORT/ivy/pagearchive/
-http://ivyengine:IVY_PORT/ivy/wf/System/
-http://ivyengine:IVY_PORT/ivy/wf/Portal/
+http://ivyengine:IVY_PORT/system/
+http://ivyengine:IVY_PORT/demo-portal/
+http://ivyengine:IVY_PORT/sec-test-helper/

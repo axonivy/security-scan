@@ -4,8 +4,8 @@ node {
         checkout scm
     }
     stage('run ZAP') {
+	  docker.withRegistry('', 'docker.io') {
 		docker.build("ivy-zap-engine", "--pull .").withRun() { c ->
-
 			def dockerImage =  docker.build("ivy-zap2docker", "--pull ./ivy-zap2docker")
 			dockerImage.inside("--link ${c.id}:ivyengine -p 5050:5050 -v $WORKSPACE:/tmp ") { d ->
 				def TARGET_PORT = '8080'
@@ -33,7 +33,8 @@ node {
 				sh "cp /zap/zap.log /tmp/IvyEngine_ZAP_log.log"
 			}
 		}
-        archiveArtifacts 'IvyEngine_ZAP*.*'
+	  }
+      archiveArtifacts 'IvyEngine_ZAP*.*'
     }
     stage('warnings') {
         recordIssues tools: [groovyScript(parserId: 'ivy-zap', pattern: 'IvyEngine_ZAP_report.txt')], unstableTotalHigh: 11		

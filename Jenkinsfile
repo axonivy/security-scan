@@ -48,7 +48,9 @@ pipeline {
 	}
 
 	stage('warnings') {
-	  recordIssues tools: [groovyScript(parserId: 'ivy-zap', pattern: 'IvyEngine_ZAP_report.txt')], unstableTotalHigh: 11		
-    }    
+	  steps {
+	  	recordIssues tools: [groovyScript(parserId: 'ivy-zap', pattern: 'IvyEngine_ZAP_report.txt')], unstableTotalHigh: 11		
+	  }
+    }
   }
 }

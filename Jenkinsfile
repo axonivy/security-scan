@@ -45,9 +45,10 @@ pipeline {
 		  archiveArtifacts 'IvyEngine_ZAP*.*'        
         }
       }
-    
+	}
+
 	stage('warnings') {
 	  recordIssues tools: [groovyScript(parserId: 'ivy-zap', pattern: 'IvyEngine_ZAP_report.txt')], unstableTotalHigh: 11		
-    }
+    }    
   }
 }

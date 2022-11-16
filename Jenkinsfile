@@ -33,6 +33,7 @@ pipeline {
                 zap start -o '-config api.disablekey=true'
                 zap status -t 120
                 zap context import /zap/IvyContext.context
+                curl $API/importurls/action/autoupdate/action/installAddon/?id=exim
                 curl $API/importurls/action/importurls/?zapapiformat=JSON&formMethod=GET&filePath=/zap/xml/UrlsToTestAgainst.txt
                 curl $API/ascan/action/setOptionDefaultPolicy/?zapapiformat=JSON&formMethod=GET&String=IvyPolicy
                 zap open-url $TARGET_URL

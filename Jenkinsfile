@@ -20,6 +20,7 @@ pipeline {
               def TARGET_PORT = '8080'
               def TARGET_URL = "http://ivyengine:$TARGET_PORT/"
               def PROXY_PORT = '5050'
+              def API="http://localhost:$PROXY_PORT/JSON"
               sh """
                 while [ \$(curl -L -o /dev/null --silent --head --write-out '%{http_code}\n' $TARGET_URL) -ne 200 ]; do sleep 2; done
                 mkdir -p /home/zap/.ZAP/policies; cp /tmp/IvyPolicy.policy /home/zap/.ZAP/policies/
@@ -28,18 +29,19 @@ pipeline {
                 cp -f /tmp/IvyContext.context /zap/
                 sed -i 's/IVY_PORT/$TARGET_PORT/g' /zap/xml/UrlsToTestAgainst.txt
                 sed -i 's/IVY_PORT/$TARGET_PORT/g' /zap/IvyContext.context
-                zap-cli -v -p $PROXY_PORT start -o '-config api.disablekey=true'
-                zap-cli -v -p $PROXY_PORT status -t 120
-                zap-cli -v -p $PROXY_PORT context import /zap/IvyContext.context
-                curl "http://localhost:$PROXY_PORT/JSON/importurls/action/importurls/?zapapiformat=JSON&formMethod=GET&filePath=/zap/xml/UrlsToTestAgainst.txt"
-                curl "http://localhost:$PROXY_PORT/JSON/ascan/action/setOptionDefaultPolicy/?zapapiformat=JSON&formMethod=GET&String=IvyPolicy"
-                zap-cli -v -p $PROXY_PORT open-url $TARGET_URL
-                zap-cli -v -p $PROXY_PORT spider -c IvyContext $TARGET_URL
-                zap-cli -v -p $PROXY_PORT active-scan -c IvyContext -r $TARGET_URL
-                zap-cli -v -p $PROXY_PORT report -o /tmp/IvyEngine_ZAP_report.html -f html
-                zap-cli -v -p $PROXY_PORT report -o /tmp/IvyEngine_ZAP_report.xml -f xml
+                alias zap="zap-cli -v -p $PROXY_PORT"
+                zap start -o '-config api.disablekey=true'
+                zap status -t 120
+                zap context import /zap/IvyContext.context
+                curl $API/importurls/action/importurls/?zapapiformat=JSON&formMethod=GET&filePath=/zap/xml/UrlsToTestAgainst.txt
+                curl $API/ascan/action/setOptionDefaultPolicy/?zapapiformat=JSON&formMethod=GET&String=IvyPolicy
+                zap open-url $TARGET_URL
+                zap spider -c IvyContext $TARGET_URL
+                zap active-scan -c IvyContext -r $TARGET_URL
+                zap report -o /tmp/IvyEngine_ZAP_report.html -f html
+                zap report -o /tmp/IvyEngine_ZAP_report.xml -f xml
                 cp -f /tmp/report.text.xsl /zap/xml/report.html.xsl
-                zap-cli -v -p $PROXY_PORT report -o /tmp/IvyEngine_ZAP_report.txt -f html
+                zap report -o /tmp/IvyEngine_ZAP_report.txt -f html
                 cp /zap/zap.log /tmp/IvyEngine_ZAP_log.log
               """
             }
